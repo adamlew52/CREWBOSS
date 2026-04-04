@@ -29,12 +29,27 @@ final class AppCoordinator: NSObject, ObservableObject {
     }
 
     /// Called by each ForestryWebView after it creates a WKWebView.
-    func register(webView: WKWebView) {
+    private var homeURLs: [WKWebView: URL] = [:]
+
+    func register(webView: WKWebView, homeURL: URL) {
         if !webViews.contains(webView) {
             webViews.append(webView)
+            homeURLs[webView] = homeURL
         }
     }
-}
+
+    // New — called when a tab is re-tapped
+    func resetToHome(webViewIndex index: Int) {
+        guard index < webViews.count else { return }
+        let webView = webViews[index]
+        guard let url = homeURLs[webView] else { return }
+        // If we're already on the home page, just scroll to top
+        if webView.url?.path == url.path {
+            webView.evaluateJavaScript("window.scrollTo({top:0,behavior:'smooth'})", completionHandler: nil)
+        } else {
+            webView.load(URLRequest(url: url))
+        }
+    }}
 
 // ─────────────────────────────────────────────────────────────────
 // MARK: – WKNavigationDelegate

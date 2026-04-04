@@ -40,7 +40,7 @@ struct ForestryWebView: UIViewRepresentable {
         if #available(iOS 16.4, *) { webView.isInspectable = true }
 
         // Give the coordinator a reference so it can call evaluateJavaScript
-        context.coordinator.register(webView: webView)
+        context.coordinator.register(webView: webView, homeURL: url)
 
         webView.load(URLRequest(url: url))
         return webView

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+
+<!--
+  ══════════════════════════════════════════════════════════════════
+  INFO.PLIST ADDITIONS — Sensaro iOS App
+  ══════════════════════════════════════════════════════════════════
+
+  These three keys MUST be present in your Info.plist or iOS will
+  crash when the app tries to access camera, photos, or location.
+
+  HOW TO ADD THEM IN XCODE:
+    1. Click your project name in the left sidebar
+    2. Select your app Target → Info tab
+    3. Click the (+) at the end of any existing row
+    4. Type the key name exactly as shown below
+    5. Set Type to "String"
+    6. Paste the description text as the value
+
+  Or you can right-click Info.plist in the sidebar, choose
+  "Open As → Source Code", and paste the XML below inside
+  the root <dict> element.
+  ══════════════════════════════════════════════════════════════════
+-->
+
+<plist version="1.0">
+<dict>
+
+    <!-- ── Camera ─────────────────────────────────────────────── -->
+    <key>NSCameraUsageDescription</key>
+    <string>Sensaro needs camera access to photograph forestry concerns like pine beetle damage or wildfire risk areas.</string>
+
+    <!-- ── Photo Library ──────────────────────────────────────── -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Sensaro needs photo library access to upload existing photos of forestry concerns.</string>
+
+    <!-- ── Location ───────────────────────────────────────────── -->
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Sensaro uses your location to accurately pin forestry concern reports on the map.</string>
+
+    <!--
+      Optional: allow background location updates if you ever
+      want to track movement while the app is backgrounded.
+      For now you most likely do NOT need this.
+
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>...</string>
+    -->
+
+</dict>
+</plist>

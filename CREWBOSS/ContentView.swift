@@ -82,7 +82,7 @@ struct ContentView: View {
         
         .toolbarBackground(.visible, for: .tabBar)
         .toolbarBackground(Color.white, for: .tabBar)
-        .tint(Color(red: 0.19, green: 0.44, blue: 0.31))
+        //.tint(Color(red: 0.19, green: 0.44, blue: 0.31))
         .onReceive(NotificationCenter.default.publisher(for: .navigateToTarget)) { note in
             guard let tab = note.userInfo?["tab"] as? String else { return }
             switch tab {

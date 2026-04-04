@@ -37,6 +37,13 @@ struct ContentView: View {
             .tabItem {
                 Label("Account Dashboard", systemImage: "person")
             }
+            
+            Button("Fire Test Notification") {
+                scheduleTestNotification()
+            }
+            .padding()
+            .tag(Tab.test)
+            .tabItem { Label("Test", systemImage: "bell.fill") }
         }
         // Forest green accent to match your existing dark-green theme
         .tint(Color(red: 0.19, green: 0.44, blue: 0.31))

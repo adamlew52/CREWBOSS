@@ -8,34 +8,34 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            // ── Tab 1: Report a Concern ──────────────────────────
+            // ── Tab 1: Dashboard ──────────────────────────
             ForestryWebView(
-                url: URL(string: "\(BASE_URL)/index.html")!,
+                url: URL(string: "\(BASE_URL)/jobs.html")!,
                 coordinator: coordinator
             )
             .ignoresSafeArea()
             .tabItem {
-                Label("Report", systemImage: "helmet.fill")
+                Label("Job Posts", systemImage: "helmet")
             }
 
-            // ── Tab 2: Forestry-only Map ─────────────────────────
+            // ── Tab 2: User Assignments ─────────────────────────
             ForestryWebView(
-                url: URL(string: "\(BASE_URL)/Display_Maps/Forestry/index.html")!,
+                url: URL(string: "\(BASE_URL)/assignments.html")!,
                 coordinator: coordinator
             )
             .ignoresSafeArea()
             .tabItem {
-                Label("Forestry Map", systemImage: "leaf.fill")
+                Label("Your Assignments", systemImage: "tray")
             }
 
-            // ── Tab 3: Wildfire + Forestry Map ───────────────────
+            // ── Tab 3: Account ───────────────────
             ForestryWebView(
-                url: URL(string: "\(BASE_URL)/Display_Maps/index.html")!,
+                url: URL(string: "\(BASE_URL)/user.html")!,
                 coordinator: coordinator
             )
             .ignoresSafeArea()
             .tabItem {
-                Label("Wildfire Map", systemImage: "flame.fill")
+                Label("Account Dashboard", systemImage: "person")
             }
         }
         // Forest green accent to match your existing dark-green theme

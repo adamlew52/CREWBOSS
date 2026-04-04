@@ -42,7 +42,6 @@ struct ContentView: View {
                 scheduleTestNotification()
             }
             .padding()
-            .tag(Tab.test)
             .tabItem { Label("Test", systemImage: "bell.fill") }
         }
         // Forest green accent to match your existing dark-green theme

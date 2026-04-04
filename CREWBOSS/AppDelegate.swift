@@ -56,8 +56,8 @@ extension Notification.Name {
 // ── Local test notification (delete before shipping) ──────────────
 func scheduleTestNotification() {
     let content = UNMutableNotificationContent()
-    content.title = "Wildfire Alert"
-    content.body  = "New activity near your area."
+    content.title = "Job Alert"
+    content.body  = "New job near your area."
     content.sound = .default
     content.badge = 1
 

@@ -5,6 +5,7 @@ private let BASE_URL = "https://www.sensaro.net/Mobile/TTTS"
 struct ContentView: View {
     // Keep one coordinator alive for the whole app lifetime
     @StateObject private var coordinator = AppCoordinator()
+    @State private var selectedTab = 0
 
     var body: some View {
         TabView {
@@ -38,7 +39,7 @@ struct ContentView: View {
                 Label("Account Dashboard", systemImage: "person")
             }
             
-            Button("Fire Test Notification") {
+            Button("Job Test Notif") {
                 scheduleTestNotification()
             }
             .padding()

@@ -3,8 +3,8 @@ import WatchConnectivity
 
 class WatchDataStore: NSObject, WCSessionDelegate, ObservableObject {
     static let shared = WatchDataStore()
-    @Published var assignments: [Assignment] = []
-    @Published var jobs: [JobPost] = []
+    @Published var assignments: [WatchAssignment] = []
+    @Published var jobs: [WatchJobPost] = []
 
     override init() {
         super.init()
@@ -25,10 +25,10 @@ class WatchDataStore: NSObject, WCSessionDelegate, ObservableObject {
     private func decode(from dict: [String: Any]) {
         DispatchQueue.main.async {
             if let data = dict["assignments"] as? Data {
-                self.assignments = (try? JSONDecoder().decode([Assignment].self, from: data)) ?? []
+                self.assignments = (try? JSONDecoder().decode([WatchAssignment].self, from: data)) ?? []
             }
             if let data = dict["jobs"] as? Data {
-                self.jobs = (try? JSONDecoder().decode([JobPost].self, from: data)) ?? []
+                self.jobs = (try? JSONDecoder().decode([WatchJobPost].self, from: data)) ?? []
             }
         }
     }

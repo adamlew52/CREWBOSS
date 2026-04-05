@@ -12,7 +12,7 @@ class WatchSessionManager: NSObject, WCSessionDelegate, ObservableObject {
         }
     }
 
-    func sendAssignments(_ assignments: [Assignment]) {
+    func sendAssignments(_ assignments: [WatchAssignment]) {
         guard WCSession.default.isReachable else { return }
         let data = try? JSONEncoder().encode(assignments)
         WCSession.default.sendMessage(
@@ -22,7 +22,7 @@ class WatchSessionManager: NSObject, WCSessionDelegate, ObservableObject {
     }
 
     // Also push via applicationContext so Watch gets it even when not reachable
-    func updateContext(assignments: [Assignment], jobs: [JobPost]) {
+    func updateContext(assignments: [WatchAssignment], jobs: [WatchJobPost]) {
         let aData = (try? JSONEncoder().encode(assignments)) ?? Data()
         let jData = (try? JSONEncoder().encode(jobs)) ?? Data()
         try? WCSession.default.updateApplicationContext([

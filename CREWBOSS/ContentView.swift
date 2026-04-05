@@ -63,11 +63,11 @@ struct ContentView: View {
                 .tag(0)
                 // The bridge only needs to be in one tab — it walks up to
                 // the shared UITabBarController from whichever tab it's in
-                .background(
-                    TabBarReselectHandler { index in
-                        coordinator.resetToHome(webViewIndex: index)
-                    }
-                )
+                //.background(
+                //    TabBarReselectHandler { index in
+                //        coordinator.resetToHome(webViewIndex: index)
+                //    }
+                //)
 
             ForestryWebView(url: tabURLs[1], coordinator: coordinator)
                 .ignoresSafeArea()
@@ -81,8 +81,8 @@ struct ContentView: View {
         }
         
         //.toolbarBackground(.visible, for: .tabBar)
-        //.toolbarBackground(Color.white, for: .tabBar)
-        //.tint(Color(red: 0.19, green: 0.44, blue: 0.31))
+        .toolbarBackground(Color.white, for: .tabBar)
+        .tint(Color(red: 0.19, green: 0.44, blue: 0.31))
         .onReceive(NotificationCenter.default.publisher(for: .navigateToTarget)) { note in
             guard let tab = note.userInfo?["tab"] as? String else { return }
             switch tab {

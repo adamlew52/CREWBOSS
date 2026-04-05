@@ -38,7 +38,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationTitle("Sensaro")
+            .navigationTitle("CREWBOSS")
         }
     }
 }

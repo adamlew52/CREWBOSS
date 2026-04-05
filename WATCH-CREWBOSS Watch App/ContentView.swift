@@ -41,4 +41,4 @@ struct ContentView: View {
             .navigationTitle("Sensaro")
         }
     }
-}s
+}

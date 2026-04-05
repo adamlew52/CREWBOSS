@@ -8,17 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+    @StateObject private var store = WatchDataStore.shared
 
-#Preview {
-    ContentView()
-}
+    var body: some View {
+        NavigationStack {
+            List {
+                Section("Your Assignments") {
+                    if store.assignments.isEmpty {
+                        Text("Open the iPhone app to sync")
+                            .foregroundStyle(.secondary)
+                            .font(.footnote)
+                    } else {
+                        ForEach(store.assignments) { a in
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(a.title).font(.headline)
+                                Text(a.location).font(.caption).foregroundStyle(.secondary)
+                                Text(a.date).font(.caption2).foregroundStyle(.tertiary)
+                            }
+                        }
+                    }
+                }
+
+                Section("Job Posts") {
+                    ForEach(store.jobs) { job in
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(job.title).font(.headline)
+                            Text(job.location).font(.caption).foregroundStyle(.secondary)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Sensaro")
+        }
+    }
+}s

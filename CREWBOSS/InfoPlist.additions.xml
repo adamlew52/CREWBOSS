@@ -26,6 +26,11 @@
 
 <plist version="1.0">
 <dict>
+    <key>CFBundleIconName</key>
+    <string>Assets.xcassets</string>
+    
+    <key>CFBundleIdentifier</key>
+    <string>/Users/alew/Desktop/CREWBOSS/CREWBOSS/WATCH-CREWBOSS Watch App/Assets.xcassets</string>
 
     <!-- ── Camera ─────────────────────────────────────────────── -->
     <key>NSCameraUsageDescription</key>

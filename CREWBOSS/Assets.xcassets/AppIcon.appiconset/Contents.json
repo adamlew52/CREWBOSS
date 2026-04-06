@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "twin timbers copy Large 1.png",
+      "filename" : "AppIconLight.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -13,7 +13,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "twin timbers copy Large 2.png",
+      "filename" : "AppIconLight 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -25,7 +25,7 @@
           "value" : "tinted"
         }
       ],
-      "filename" : "twin timbers copy Large.png",
+      "filename" : "AppIconDark.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"

@@ -2,9 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleIconName</key>
+	<string>Assets.xcassets</string>
+	<key>CFBundleIdentifier</key>
+	<string>/Users/alew/Desktop/CREWBOSS/CREWBOSS/WATCH-CREWBOSS Watch App/Assets.xcassets</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Assets.xcassets</string>
+		<string>/Users/alew/Desktop/CREWBOSS/CREWBOSS/WATCH-CREWBOSS Watch App/Assets.xcassets</string>
 	</array>
 </dict>
 </plist>

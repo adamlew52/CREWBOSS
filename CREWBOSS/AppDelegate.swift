@@ -6,7 +6,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UNUserNotificationCenter.current().delegate = self
-        // Request permission and register for remote notifications
         UNUserNotificationCenter.current()
             .requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
                 guard granted else { return }
@@ -17,11 +16,14 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         return true
     }
 
-    // ── Prints your device token to the Xcode console ────────────
+    // ── Saves token so ForestryWebView can inject it into every page ──
+    // Registration with your server (pairing token + user_id) happens
+    // in the web JS after the user logs in — see ForestryWebView.swift.
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let token = deviceToken.map { String(format: "%02x", $0) }.joined()
         print("APNs token: \(token)")
+        UserDefaults.standard.set(token, forKey: "apns_device_token")
     }
 
     func application(_ application: UIApplication,
@@ -29,7 +31,14 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         print("APNs registration failed: \(error)")
     }
 
-    // ── Fires when the user TAPS a notification ───────────────────
+    // ── Show banner even when app is in the foreground ────────────────
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .sound, .badge])
+    }
+
+    // ── Fires when the user TAPS a notification ───────────────────────
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -48,22 +57,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
 }
 
-// ── Notification name used by ContentView's onReceive ─────────────
+// ── Notification name used by ContentView's onReceive ─────────────────
 extension Notification.Name {
     static let navigateToTarget = Notification.Name("navigateToTarget")
-}
-
-// ── Local test notification (delete before shipping) ──────────────
-func scheduleTestNotification() {
-    let content = UNMutableNotificationContent()
-    content.title = "Job Alert"
-    content.body  = "New job near your area."
-    content.sound = .default
-    content.badge = 1
-
-    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-    let request = UNNotificationRequest(identifier: UUID().uuidString,
-                                        content: content,
-                                        trigger: trigger)
-    UNUserNotificationCenter.current().add(request)
 }

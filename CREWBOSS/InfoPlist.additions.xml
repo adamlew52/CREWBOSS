@@ -43,6 +43,15 @@
     <!-- ── Location ───────────────────────────────────────────── -->
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Sensaro uses your location to accurately pin forestry concern reports on the map.</string>
+    
+    <key>NSCameraUsageDescription</key>
+    <string>Used to take photos for upload.</string>
+    
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Used to select photos for upload.</string>
+    
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Used to save photos to your library.</string>
 
     <!--
       Optional: allow background location updates if you ever

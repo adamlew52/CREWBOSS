@@ -3,20 +3,24 @@
 <plist version="1.0">
 <dict>
     <key>NSCameraUsageDescription</key>
-    <string>For uploading images of jobs and documents.</string>
-
+    <string>Used to take photos for upload.</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>Sensaro needs photo library access to upload existing photos of forestry concerns.</string>
-
+    <string>Used to select photos for upload.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
     <string>Used to save photos to your library.</string>
-
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Sensaro uses your location to accurately pin forestry concern reports on the map.</string>
-
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+    <key>UIUserInterfaceStyle</key>
+    <string>Light</string>
+    <key>UILaunchScreen</key>
+    <dict>
+        <key>UIColorName</key>
+        <string>LaunchBackground</string>
+    </dict>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Sensaro uses your location in the background to alert you to nearby fire activity.</string>
-
+    <string>FUELBREAK uses your location in the background to alert you to nearby fire activity.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>FUELBREAK uses your location to show you nearby wildfire and forestry activity.</string>
     <key>UIBackgroundModes</key>
     <array>
         <string>fetch</string>
@@ -24,14 +28,5 @@
         <string>remote-notification</string>
         <string>processing</string>
     </array>
-
-    <key>UIUserInterfaceStyle</key>
-    <string>Light</string>
-
-    <key>UILaunchScreen</key>
-    <dict>
-        <key>UIColorName</key>
-        <string>LaunchBackground</string>
-    </dict>
 </dict>
 </plist>

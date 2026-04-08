@@ -1,37 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>NSCameraUsageDescription</key>
-    <string>For uploading images of jobs and documents.</string>
+    <key>CFBundleIconName</key>
+    <string>Assets.xcassets</string>
+    
+    <key>CFBundleIdentifier</key>
+    <string>/Users/alew/Desktop/CREWBOSS/CREWBOSS/WATCH-CREWBOSS Watch App/Assets.xcassets</string>
 
+    <!-- ── Camera ─────────────────────────────────────────────── -->
+    <key>NSCameraUsageDescription</key>
+    <string>Sensaro needs camera access to photograph forestry concerns like pine beetle damage or wildfire risk areas.</string>
+
+    <!-- ── Photo Library ──────────────────────────────────────── -->
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Sensaro needs photo library access to upload existing photos of forestry concerns.</string>
 
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Used to save photos to your library.</string>
-
+    <!-- ── Location ───────────────────────────────────────────── -->
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Sensaro uses your location to accurately pin forestry concern reports on the map.</string>
 
+    <!--
+      Optional: allow background location updates if you ever
+      want to track movement while the app is backgrounded.
+      For now you most likely do NOT need this.
+
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Sensaro uses your location in the background to alert you to nearby fire activity.</string>
+    <string>...</string>
+    -->
 
-    <key>UIBackgroundModes</key>
-    <array>
-        <string>fetch</string>
-        <string>location</string>
-        <string>remote-notification</string>
-        <string>processing</string>
-    </array>
-
-    <key>UIUserInterfaceStyle</key>
-    <string>Light</string>
-
-    <key>UILaunchScreen</key>
-    <dict>
-        <key>UIColorName</key>
-        <string>LaunchBackground</string>
-    </dict>
 </dict>
 </plist>

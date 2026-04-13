@@ -26,7 +26,11 @@
         <string>fetch</string>
         <string>location</string>
         <string>remote-notification</string>
-        <string>processing</string>
+        <!--string>processing</string-->
+    </array>
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+        <string>CREWBOSS.refresh</string>
     </array>
 </dict>
 </plist>

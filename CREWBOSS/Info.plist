@@ -2,35 +2,40 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>NSCameraUsageDescription</key>
-    <string>Used to take photos for upload.</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Used to select photos for upload.</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Used to save photos to your library.</string>
-    <key>CFBundleIconFile</key>
-    <string>AppIcon</string>
-    <key>UIUserInterfaceStyle</key>
-    <string>Light</string>
-    <key>UILaunchScreen</key>
-    <dict>
-        <key>UIColorName</key>
-        <string>LaunchBackground</string>
-    </dict>
-    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>FUELBREAK uses your location in the background to alert you to nearby fire activity.</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>FUELBREAK uses your location to show you nearby wildfire and forestry activity.</string>
-    <key>UIBackgroundModes</key>
+	<key>CFBundleIdentifier</key>
+	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to take photos for upload.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used to select photos for upload.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Used to save photos to your library.</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>LaunchBackground</string>
+	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>FUELBREAK uses your location in the background to alert you to nearby fire activity.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>FUELBREAK uses your location to show you nearby wildfire and forestry activity.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>CREWBOSS.refresh</string>
+	</array>
+    <key>NSUserActivityTypes</key>
     <array>
-        <string>fetch</string>
-        <string>location</string>
-        <string>remote-notification</string>
-        <!--string>processing</string-->
-    </array>
-    <key>BGTaskSchedulerPermittedIdentifiers</key>
-    <array>
-        <string>CREWBOSS.refresh</string>
+        <string>INSendMessageIntent</string>
     </array>
 </dict>
 </plist>

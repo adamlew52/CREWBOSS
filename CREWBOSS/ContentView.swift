@@ -52,6 +52,7 @@ struct ContentView: View {
     private let tabURLs: [URL] = [
         URL(string: "\(BASE_URL)/jobs.html")!,
         URL(string: "\(BASE_URL)/assignments.html")!,
+        URL(string: "\(BASE_URL)/calendar.html")!,
         URL(string: "\(BASE_URL)/user.html")!,
     ]
 
@@ -73,10 +74,15 @@ struct ContentView: View {
                 .ignoresSafeArea()
                 .tabItem { Label("Your Assignments", systemImage: "tray") }
                 .tag(1)
-
+            
             ForestryWebView(url: tabURLs[2], coordinator: coordinator)
                 .ignoresSafeArea()
-                .tabItem { Label("Account Dashboard", systemImage: "person") }
+                .tabItem { Label("Calendar", systemImage: "calendar") }
+                .tag(1)
+
+            ForestryWebView(url: tabURLs[3], coordinator: coordinator)
+                .ignoresSafeArea()
+                .tabItem { Label("Account", systemImage: "person") }
                 .tag(2)
         }
         

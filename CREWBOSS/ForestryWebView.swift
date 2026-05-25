@@ -88,6 +88,8 @@ struct ForestryWebView: UIViewRepresentable {
         config.userContentController.addUserScript(
             WKUserScript(source: noZoom, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         )
+
+        let webView = WKWebView(frame: .zero, configuration: config)  // already exists
         
 
         let webView = WKWebView(frame: .zero, configuration: config)

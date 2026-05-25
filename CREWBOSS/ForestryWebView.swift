@@ -73,11 +73,30 @@ struct ForestryWebView: UIViewRepresentable {
             """)
         }
         
+        // ── Disable pinch-to-zoom ────────────────────────────────────────────
+        let noZoom = """
+            var meta = document.querySelector('meta[name=viewport]');
+            if (meta) {
+                meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+            } else {
+                meta = document.createElement('meta');
+                meta.name = 'viewport';
+                meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+                document.head.appendChild(meta);
+            }
+        """
+        config.userContentController.addUserScript(
+            WKUserScript(source: noZoom, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        )
+
+        let webView = WKWebView(frame: .zero, configuration: config)  // already exists
+        
 
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate          = context.coordinator
         webView.scrollView.contentInsetAdjustmentBehavior = .scrollableAxes
+        webView.scrollView.pinchGestureRecognizer?.isEnabled = false
 
         if #available(iOS 16.4, *) { webView.isInspectable = true }
 

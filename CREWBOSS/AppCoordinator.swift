@@ -284,7 +284,7 @@ extension AppCoordinator {
                             "displayName": p.displayName,
                             "description": p.description,
                             "price":       "\(p.price)",
-                            "currency":    p.priceFormatStyle.currencyCode ?? "USD",
+                            "currency":    p.priceFormatStyle.currencyCode,
                         ]
                     }
                     let data = try JSONSerialization.data(withJSONObject: json)
@@ -502,4 +502,3 @@ private extension AppCoordinator {
         return vc
     }
 }
-

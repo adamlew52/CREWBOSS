@@ -59,4 +59,3 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 extension Notification.Name {
     static let navigateToTarget = Notification.Name("navigateToTarget")
 }
-

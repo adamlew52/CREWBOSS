@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>CFBundleDisplayName</key>
+    <string>CREWBOSS</string>
 	<key>CFBundleIdentifier</key>
-	<string></string>
+	<string>CREWBOSS</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Used to take photos for upload.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -33,9 +35,9 @@
 	<array>
 		<string>CREWBOSS.refresh</string>
 	</array>
-    <key>NSUserActivityTypes</key>
-    <array>
-        <string>INSendMessageIntent</string>
-    </array>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>INSendMessageIntent</string>
+	</array>
 </dict>
 </plist>

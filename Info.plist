@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- ── Identity ─────────────────────────────────────────── -->
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+
+	<!-- Home-screen name. This is the "CREWBOSS - Twin Timbers" fix. -->
+	<key>CFBundleDisplayName</key>
+	<string>CREWBOSS</string>
+
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+
+	<!-- ── Version (driven by build settings, bump via agvtool) ── -->
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+
+	<!-- ── Icon: asset catalog, not CFBundleIconFile (macOS key) ── -->
+	<key>CFBundleIconName</key>
+	<string>AppIcon</string>
+
+	<!-- ── Export compliance: skips the ATS prompt on every upload ── -->
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+
+	<!-- ── Appearance / launch ──────────────────────────────── -->
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>LaunchBackground</string>
+	</dict>
+
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+
+	<!-- ── Privacy strings (app name corrected: was FUELBREAK/Sensaro) ── -->
+	<key>NSCameraUsageDescription</key>
+	<string>CREWBOSS uses the camera to photograph job sites and attach images to crew reports.</string>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>CREWBOSS uses your photo library so you can attach existing photos to crew reports.</string>
+
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>CREWBOSS saves photos you capture in the app to your photo library.</string>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>CREWBOSS uses your location to tag job sites and crew reports with accurate coordinates.</string>
+
+	<!-- ── Face ID / Touch ID ──────────────────────────────────
+	     REQUIRED. LAContext.evaluatePolicy raises an exception if
+	     this key is absent, even on Touch ID devices. -->
+	<key>NSFaceIDUsageDescription</key>
+	<string>CREWBOSS uses Face ID to keep your crew and job site data locked when you're away from your phone.</string>
+
+	<!-- ── Background modes: remote-notification only ────────────
+	     `location` and `fetch` were removed. Declaring them without a
+	     shipping background-location feature and a registered
+	     BGTaskScheduler handler is a Guideline 2.5.4 rejection.
+	     If you later ship background location, re-add `location`
+	     AND NSLocationAlwaysAndWhenInUseUsageDescription. -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+</dict>
+</plist>

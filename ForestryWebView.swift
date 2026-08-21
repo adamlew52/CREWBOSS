@@ -9,7 +9,13 @@ import StoreKit
 //  - APNs device token bridge
 //  - setUserId handler (called by dashboard.html JS)
 //  - Geolocation bridge
+//  - Biometric bridge (window.CrewBossAuth)
 //  - IAP test hooks
+//
+//  NOTE: Cognito Hosted UI cookies live in
+//  WKWebsiteDataStore.default() and persist across launches.
+//  Do not switch to .nonPersistent() or every relaunch will
+//  bounce the user back through OAuth.
 // ═══════════════════════════════════════════════════════
 
 private let API_GATEWAY_URL = "https://y25m8puewi.execute-api.us-west-1.amazonaws.com/prod/notify"
@@ -42,7 +48,7 @@ struct ForestryWebView: UIViewRepresentable {
         config.allowsInlineMediaPlayback = true
         config.mediaTypesRequiringUserActionForPlayback = []
 
-        // Use aggressive caching on the data store
+        // Persistent store — required for the Cognito session cookie.
         config.websiteDataStore = .default()
 
         // ── Geolocation bridge ───────────────────────────
@@ -53,9 +59,18 @@ struct ForestryWebView: UIViewRepresentable {
             forMainFrameOnly: false
         ))
 
+        // ── Biometric bridge (Face ID / Touch ID) ────────
+        // Exposes window.CrewBossAuth to every page.
+        // Handler is BiometricBridge.shared, not the coordinator,
+        // so AppCoordinator.swift needs no changes.
+        ctrl.add(BiometricBridge.shared, name: "biometricRequest")
+        ctrl.addUserScript(WKUserScript(
+            source: biometricBridgeJS,
+            injectionTime: .atDocumentStart,
+            forMainFrameOnly: true
+        ))
+
         // ── APNs token bridge ────────────────────────────
-        // Exposes window.__apns_device_token and the CrewBoss
-        // registration helper to every page load.
         let savedToken = UserDefaults.standard.string(forKey: "apns_device_token") ?? ""
         let tokenBridgeJS = """
         (function () {
@@ -90,12 +105,12 @@ struct ForestryWebView: UIViewRepresentable {
         ))
 
         // ── setUserId handler ────────────────────────────
-        // dashboard.html calls:
-        //   window.webkit.messageHandlers.setUserId.postMessage(email)
-        // This triggers the native APNs registration with the backend.
         ctrl.add(context.coordinator, name: "setUserId")
 
-        // ── Xcode console bridge ─────────────────────────
+        // ── Xcode console bridge (DEBUG only) ────────────
+        // Shipping this in Release leaks page internals into the
+        // system log and adds a message hop on every console call.
+        #if DEBUG
         ctrl.add(context.coordinator, name: "xcodelogdebug")
         ctrl.addUserScript(WKUserScript(
             source: """
@@ -117,6 +132,7 @@ struct ForestryWebView: UIViewRepresentable {
             injectionTime: .atDocumentStart,
             forMainFrameOnly: false
         ))
+        #endif
 
         // ── Disable pinch-to-zoom ────────────────────────
         ctrl.addUserScript(WKUserScript(
@@ -131,9 +147,6 @@ struct ForestryWebView: UIViewRepresentable {
         ))
 
         // ── IAP bridge ───────────────────────────────────
-        // Exposes window.CrewBossIAP to the web layer.
-        // For now this is a test stub — calls StoreKit 2
-        // to fetch products and initiate purchases.
         ctrl.add(context.coordinator, name: "iapRequest")
         ctrl.addUserScript(WKUserScript(
             source: iapBridgeJS,
@@ -147,13 +160,15 @@ struct ForestryWebView: UIViewRepresentable {
         webView.uiDelegate         = context.coordinator
         webView.allowsBackForwardNavigationGestures = false
 
-        // Safe area: let the web page handle insets via env()
         webView.scrollView.contentInsetAdjustmentBehavior = .never
         webView.scrollView.pinchGestureRecognizer?.isEnabled = false
 
+        #if DEBUG
         if #available(iOS 16.4, *) { webView.isInspectable = true }
+        #endif
 
         context.coordinator.register(webView: webView, homeURL: url)
+        BiometricBridge.shared.attach(webView)
 
         // ── Load with offline fallback ───────────────────
         loadWithOfflineFallback(webView: webView, url: url)
@@ -164,13 +179,11 @@ struct ForestryWebView: UIViewRepresentable {
     func updateUIView(_ uiView: WKWebView, context: Context) {}
 
     // ── Offline loading strategy ─────────────────────────
-    // Try network first. If offline, fall back to URLCache.
     private func loadWithOfflineFallback(webView: WKWebView, url: URL) {
         var request = URLRequest(url: url)
-        request.cachePolicy = .reloadRevalidatingCacheData  // network first, cache fallback
+        request.cachePolicy = .reloadRevalidatingCacheData
         request.timeoutInterval = 10
 
-        // If we know we're offline, use cache directly
         if !NetworkMonitor.shared.isConnected {
             request.cachePolicy = .returnCacheDataDontLoad
         }
@@ -216,15 +229,6 @@ struct ForestryWebView: UIViewRepresentable {
     """
 
     // ── IAP bridge JS ────────────────────────────────────
-    // Web JS can call:
-    //   CrewBossIAP.getProducts()       → returns JSON array of products
-    //   CrewBossIAP.purchase(productId) → initiates purchase flow
-    //   CrewBossIAP.restore()           → restores previous purchases
-    //
-    // Results come back via window events:
-    //   window.addEventListener('iap-products', e => e.detail)
-    //   window.addEventListener('iap-purchased', e => e.detail)
-    //   window.addEventListener('iap-error', e => e.detail)
     private let iapBridgeJS = """
     (function () {
         window.CrewBossIAP = {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	  REMOVED (macOS App Sandbox keys — invalid on iOS, cause ITMS-90287
+	  "Invalid Code Signing Entitlements" on upload):
+	    com.apple.security.device.camera
+	    com.apple.security.personal-information.photos-library
+	  Camera/photo access on iOS is governed by the NS*UsageDescription
+	  strings in Info.plist, not entitlements.
+
+	  REMOVED:
+	    com.apple.developer.usernotifications.communication
+	  This is a restricted entitlement requiring an approved Communication
+	  Notifications capability on the App ID plus a real INSendMessageIntent
+	  donation flow. Nothing in AppDelegate/AppCoordinator donates intents,
+	  so it will fail provisioning-profile matching. Re-add only if you
+	  actually implement communication notifications.
+	-->
+
+	<key>aps-environment</key>
+	<string>production</string>
+</dict>
+</plist>

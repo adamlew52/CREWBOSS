@@ -75,6 +75,7 @@
 		7A2383272F86CD0F008576E9 /* Exceptions for "CREWBOSS" folder in "CREWBOSS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				AuthKey_CJ6FS2T3ZM.p8,
 				Info.plist,
 				InfoPlist.additions.xml,
 			);
